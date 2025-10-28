@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Resource Center - Krasiva Windows and Doors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-text {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #008C99;
+        }
+
+        .header-subtitle {
+            color: #666;
+            font-size: 0.9em;
+            font-weight: 400;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 40px;
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .page-description {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /* Security Notice */
+        .notice-banner {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 16px 24px;
+            margin-bottom: 50px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        .notice-banner strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .notice-banner p {
+            color: #856404;
+            margin: 0;
+        }
+
+        /* Section Headers */
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        /* App Cards */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 8px;
+            padding: 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .app-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .app-logo {
+            width: 80px;
+            height: 80px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e9ecef;
+        }
+
+        .app-logo img {
+            max-width: 60px;
+            max-height: 60px;
+        }
+
+        .app-card h3 {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .app-card p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .app-link {
+            display: inline-flex;
+            align-items: center;
+            color: #008C99;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95em;
+            transition: all 0.2s ease;
+        }
+
+        .app-link:hover {
+            color: #006b75;
+        }
+
+        .app-link::after {
+            content: "→";
+            margin-left: 8px;
+            transition: margin-left 0.2s ease;
+        }
+
+        .app-link:hover::after {
+            margin-left: 12px;
+        }
+
+        /* Training Videos */
+        .video-grid {
+            display: grid;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 8px;
+            padding: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+
+        .video-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .video-card h3 {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .video-card .video-description {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-footer {
+            padding: 20px 32px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .completion-check {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .completion-check input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #008C99;
+        }
+
+        .completion-check label {
+            cursor: pointer;
+            font-size: 0.95em;
+            color: #495057;
+            user-select: none;
+        }
+
+        /* Resources */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .resource-item {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .resource-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            border-color: #008C99;
+        }
+
+        .resource-item h4 {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .resource-item p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .resource-item a {
+            color: #008C99;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .resource-item a::after {
+            content: "→";
+            margin-left: 6px;
+            transition: margin-left 0.2s ease;
+        }
+
+        .resource-item a:hover {
+            color: #006b75;
+        }
+
+        .resource-item a:hover::after {
+            margin-left: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 32px 40px;
+            margin-top: 80px;
+            font-size: 0.9em;
+        }
+
+        .footer p {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 16px 20px;
+            }
+
+            .main-content {
+                padding: 20px;
+                margin-top: 80px;
+            }
+
+            .page-title {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .app-grid,
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <div class="logo-text">Krasiva Windows and Doors</div>
+                <div class="header-subtitle">Employee Resource Center</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1 class="page-title">Welcome to the Resource Center</h1>
+        <p class="page-description">Access training materials, essential applications, and important company resources</p>
+
+        <!-- Security Notice -->
+        <div class="notice-banner">
+            <strong>Confidential Information</strong>
+            <p>All training videos and resources are proprietary to Krasiva Windows and Doors and for internal use only. Please do not share materials outside the organization.</p>
+        </div>
+
+        <!-- Required Applications -->
+        <section class="section">
+            <h2 class="section-title">Required Applications</h2>
+            <p class="section-subtitle">Download and set up these essential tools before your first day</p>
+
+            <div class="app-grid">
+                <div class="app-card">
+                    <div class="app-logo">
+                        <!-- Replace with actual eCanvasser logo -->
+                        <span style="color: #008C99; font-weight: 600; font-size: 1.2em;">eCanvasser</span>
+                    </div>
+                    <h3>eCanvasser</h3>
+                    <p>Primary canvassing and data management platform. Essential for field operations, contact logging, and territory management.</p>
+                    <a href="https://www.ecanvasser.com/download" class="app-link" target="_blank">Download Application</a>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-logo">
+                        <!-- Replace with actual Intuit logo -->
+                        <span style="color: #008C99; font-weight: 600; font-size: 1.2em;">Intuit</span>
+                    </div>
+                    <h3>Intuit Workforce</h3>
+                    <p>Time tracking and scheduling platform. Use this to clock in and out, view your schedule, and manage timecards.</p>
+                    <a href="https://workforce.intuit.com/" class="app-link" target="_blank">Access Platform</a>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-logo">
+                        <!-- Replace with actual WhatsApp logo -->
+                        <span style="color: #008C99; font-weight: 600; font-size: 1.2em;">WhatsApp</span>
+                    </div>
+                    <h3>WhatsApp Business</h3>
+                    <p>Team communication platform. Stay connected with your team, receive updates, and coordinate in real-time.</p>
+                    <a href="https://www.whatsapp.com/download" class="app-link" target="_blank">Download Application</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Videos -->
+        <section class="section">
+            <h2 class="section-title">Training Modules</h2>
+            <p class="section-subtitle">Complete all training modules before beginning field work</p>
+
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-header">
+                        <h3>eCanvasser Platform Training</h3>
+                        <p class="video-description">Comprehensive overview of the eCanvasser platform including navigation, contact logging, data synchronization, and field operations best practices.</p>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/DaIfB1-9vFI?modestbranding=1&rel=0&showinfo=0&controls=1&disablekb=1&fs=0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-footer">
+                        <div class="completion-check">
+                            <input type="checkbox" id="ecanvasser-complete">
+                            <label for="ecanvasser-complete">Mark as completed</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-header">
+                        <h3>Canvassing Script & Communication</h3>
+                        <p class="video-description">Learn the approved canvassing script, conversation techniques, objection handling strategies, and key messaging points for effective customer engagement.</p>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/DaIfB1-9vFI?modestbranding=1&rel=0&showinfo=0&controls=1&disablekb=1&fs=0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-footer">
+                        <div class="completion-check">
+                            <input type="checkbox" id="script-complete">
+                            <label for="script-complete">Mark as completed</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-header">
+                        <h3>Field Safety & Professional Conduct</h3>
+                        <p class="video-description">Essential safety protocols, professional conduct standards, and guidelines for representing Krasiva Windows and Doors in the field.</p>
+                    </div>
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/DaIfB1-9vFI?modestbranding=1&rel=0&showinfo=0&controls=1&disablekb=1&fs=0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-footer">
+                        <div class="completion-check">
+                            <input type="checkbox" id="safety-complete">
+                            <label for="safety-complete">Mark as completed</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Important Resources -->
+        <section class="section">
+            <h2 class="section-title">Important Resources</h2>
+            <p class="section-subtitle">Quick access to essential documents and tools</p>
+
+            <div class="resource-grid">
+                <div class="resource-item">
+                    <h4>Company Website</h4>
+                    <p>Access our main website for company information, services, and public-facing resources.</p>
+                    <a href="https://krasivawindows.com" target="_blank">Visit Website</a>
+                </div>
+
+                <div class="resource-item">
+                    <h4>Daily Lead Sheet</h4>
+                    <p>Track and report daily leads, contacts, and field activity. Update after each shift.</p>
+                    <a href="https://docs.google.com/spreadsheets/YOUR_SHEET_ID" target="_blank">Open Lead Sheet</a>
+                </div>
+
+                <div class="resource-item">
+                    <h4>Employee Handbook</h4>
+                    <p>Complete guide to company policies, procedures, benefits, and guidelines.</p>
+                    <a href="/handbook.pdf" target="_blank">View Handbook</a>
+                </div>
+
+                <div class="resource-item">
+                    <h4>Script Reference Guide</h4>
+                    <p>Quick reference for approved talking points, responses to common questions, and messaging.</p>
+                    <a href="/script-reference.pdf" target="_blank">View Script</a>
+                </div>
+
+                <div class="resource-item">
+                    <h4>Territory Maps</h4>
+                    <p>Interactive maps showing assigned canvassing territories, zones, and coverage areas.</p>
+                    <a href="https://www.google.com/maps/d/YOUR_MAP_ID" target="_blank">View Maps</a>
+                </div>
+
+                <div class="resource-item">
+                    <h4>Support & FAQ</h4>
+                    <p>Frequently asked questions, troubleshooting guides, and how to get help when needed.</p>
+                    <a href="/faq.html" target="_blank">Get Support</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Krasiva Windows and Doors. All rights reserved. Confidential & Proprietary.</p>
+    </footer>
+
+    <script>
+        // Disable right-click on videos
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IFRAME') {
+                e.preventDefault();
+            }
+        });
+
+        // Disable inspect shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
+                (e.ctrlKey && e.keyCode === 85)) {
+                e.preventDefault();
+            }
+        });
+
+        // Save and load checkbox states
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        
+        checkboxes.forEach(checkbox => {
+            // Load saved state
+            const saved = localStorage.getItem(checkbox.id);
+            if (saved === 'true') {
+                checkbox.checked = true;
+            }
+
+            // Save on change
+            checkbox.addEventListener('change', function() {
+                localStorage.setItem(this.id, this.checked);
+            });
+        });
+    </script>
+</body>
+</html>
